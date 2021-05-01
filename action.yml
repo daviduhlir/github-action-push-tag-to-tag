@@ -1,0 +1,30 @@
+name: 'Push tag to another tag'
+description: 'Useful to to mark some tag with version as deployed or as stable'
+inputs:
+  destination-github-username:
+    description: 'Name of the destination username/organization'
+    required: true
+  destination-repository-name:
+    description: 'Destination repository'
+    required: true
+  user-email:
+    description: 'Email for the git commit'
+    required: true
+  new-tag:
+    description: 'Tag name to be placed'
+    required: true
+  existing-tag:
+    description: 'Point, where new tag will be placed'
+    required: false
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.destination-github-username }}
+    - ${{ inputs.destination-repository-name }}
+    - ${{ inputs.user-email }}
+    - ${{ inputs.new-tag }}
+    - ${{ inputs.existing-tag }}
+branding:
+  icon: 'git-commit'
+  color: 'green'
